@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:math_expressions/math_expressions.dart';
-import 'package:flutter_classwork_assignment/flutter_calculator_app/color.dart';
+import 'color.dart';
 
 class CalculatorApp extends StatefulWidget {
   const CalculatorApp({Key? key}) : super(key:key);
@@ -131,22 +131,26 @@ class _CalculatorAppState extends State<CalculatorApp>{
     text, tColor = Colors.white, buttonBgColor = buttonColor,
   }){
     return Expanded(child: Container(
-      margin: const EdgeInsets.all(
+      margin: const EdgeInsets.all(8),
       child: ElevatedButton(
-      style: ElevatedButton.styleFrom(
-      padding: const EdgeInsets.all(22),
-      primary: buttonBgColor,
-    ),
-      onPressed: ()=> onButtonClick(text),
-      child: Text(
-        text,
-        style: TextStyle(
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.all(16),
+          primary: buttonBgColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+          ),
+        ),
+        onPressed: () => onButtonClick(text),
+        child: Text(
+          text,
+          style: TextStyle(
             fontSize: 18,
             color: tColor,
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
-    ),
+
     ));
   }
 
