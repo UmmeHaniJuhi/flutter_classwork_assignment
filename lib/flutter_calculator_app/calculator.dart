@@ -18,35 +18,36 @@ class _CalculatorAppState extends State<CalculatorApp>{
   var operator = '';
 
 
-  onButtonClick(value){
-    if (value == "AC"){
+  onButtonClick(String value) {
+    if (value == "AC") {
       input = '';
-      output='';
-    }
-    else if(value == "<"){
-      if(input.isNotEmpty) {
+      output = '';
+    } else if (value == "<") {
+      if (input.isNotEmpty) {
         input = input.substring(0, input.length - 1);
       }
-    }
-    else if(value == "="){
-      if(input.isNotEmpty) {
+    } else if (value == "=") {
+      if (input.isNotEmpty) {
         var userInput = input;
-        userInput = input.replaceAll("x", "*");
+        userInput = userInput.replaceAll("x", "*");
         Parser p = Parser();
         Expression expression = p.parse(userInput);
         ContextModel cm = ContextModel();
         var finalValue = expression.evaluate(EvaluationType.REAL, cm);
         output = finalValue.toString();
       }
-      input=output;
+      input = output;
+    } else if (value == "%") {
+      if (input.isNotEmpty) {
+        input += "/100";
+      }
+    } else {
+      input += value;
     }
-    else{
-      input = input+value;
-    }
-    setState(() {
-
-    });
+    setState(() {});
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,16 +87,24 @@ class _CalculatorAppState extends State<CalculatorApp>{
             children: [
               button(text: "AC", buttonBgColor: operatorColor, tColor: orangeColor),
               button(text: "<", buttonBgColor: operatorColor, tColor: orangeColor),
-              button(text: "", buttonBgColor: Colors.transparent),
+              button(text: "X", buttonBgColor: operatorColor, tColor: orangeColor),
               button(text: "/", buttonBgColor: operatorColor, tColor: orangeColor),
             ],
           ),
           Row(
             children: [
-              button(text: "7"),
-              button(text: "8"),
-              button(text: "9"),
-              button(text: "x", tColor: orangeColor, buttonBgColor: operatorColor),
+              button(text: "(" ,tColor: orangeColor, buttonBgColor: operatorColor),
+              button(text: ")",tColor: orangeColor, buttonBgColor: operatorColor),
+              button(text: "%", tColor: orangeColor, buttonBgColor: operatorColor),
+              button(text: "*", tColor: orangeColor, buttonBgColor: operatorColor),
+            ],
+          ),
+          Row(
+            children: [
+              button(text: "1"),
+              button(text: "2"),
+              button(text: "3"),
+              button(text: "-", tColor: orangeColor, buttonBgColor: operatorColor),
             ],
           ),
           Row(
@@ -103,24 +112,25 @@ class _CalculatorAppState extends State<CalculatorApp>{
               button(text: "4"),
               button(text: "5"),
               button(text: "6"),
-              button(text: "-", tColor: orangeColor, buttonBgColor: operatorColor),
+              button(text: "+", tColor: orangeColor, buttonBgColor: operatorColor),
             ],
           ),
 
           Row(
             children: [
-              button(text: "1"),
-              button(text: "2"),
-              button(text: "3"),
-              button(text: "+", tColor: orangeColor, buttonBgColor: operatorColor),
+              button(text: "7"),
+              button(text: "8"),
+              button(text: "9"),
+              button(text: "=", tColor: orangeColor, buttonBgColor: operatorColor),
             ],
           ),
           Row(
             children: [
-              button(text: "%", tColor: orangeColor, buttonBgColor: operatorColor),
               button(text: "0"),
-              button(text: "."),
-              button(text: "=", tColor: orangeColor),
+              button(text: "00"),
+              button(text: "√", tColor: orangeColor, buttonBgColor: operatorColor),
+              button(text: ".", tColor: orangeColor, buttonBgColor: operatorColor),
+
             ],
           )
         ],
